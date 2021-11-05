@@ -1,22 +1,71 @@
 {% extends 'main.twig' %}
 
 {% block body %}
+
+
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+        <h1 class="h2">Список доменов:</h1>
+        <div class="">
+            <div class="">
+                {{ countDomains }}:
+
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Linode:
+                        <span class="ml-3 badge badge-primary badge-pill">{{ countLinodeDomains }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Digital Ocean:
+                        <span class="ml-3 badge badge-primary badge-pill">{{ countDoDomains }}</span>
+                    </li>
+                </ul>
             </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                This week
-            </button>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+{#            <div class="btn-group mr-2">#}
+{#                <button class="btn btn-sm btn-outline-secondary">Share</button>#}
+{#                <button class="btn btn-sm btn-outline-secondary">Export</button>#}
+{#            </div>#}
+{#            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">#}
+{#                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>#}
+{#                This week#}
+{#            </button>#}
         </div>
     </div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-1">
+    <h2 class="h2">Не линкованные</h2>
+    <div class="btn-toolbar mb-2 mb-md-0 ">
+{#   Получение доменов     #}
+        <form action="/getDomains" class="input-group input-group-sm" method="post">
+{#            <span class="m-2">{{ hostMsg }} </span>#}
+{#            <span class="m-2">{{ anoteMsg }} </span>#}
+{#            <span class="m-2">{{ pfMsg }} </span>#}
+{#            <span class="m-2">{{ domain_msg }} </span>#}
+{#            <span class="m-2">{{ countSuccessDomain }} </span>#}
 
-    <h2>Section title</h2>
+            <div class="input-group input-group-sm">
+                <select required class="custom-select" style="width: 5px" name="host">
+                    <option value="">Хост</option>
+                    <option value="Linode">Linode</option>
+                    <option value="DO">DO</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Кол-во" required aria-label="Получить" aria-describedby="basic-addon2" name="countDomains">
+
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-outline-secondary" name="get" value="Получить">
+
+            </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
     <div class="table-responsive">
         {% set i = 1 %}
 
@@ -26,9 +75,10 @@
                 <th>#</th>
                 <th>Домен</th>
                 <th>Дата создания</th>
-                <th>ssl</th>
-                <th>Тэги</th>
-                <th>Прилинковка</th>
+                <th>Хост</th>
+                <th>
+                    Прилинковка
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -37,12 +87,19 @@
                 <td>{{ i }}</td>
                 <td>{{ domen['domen'] }}</td>
                 <td>{{ domen['datedomen']|date("m/d/Y") }}</td>
+                <td>{{ domen['host'] }}</td>
                 <td>
-                    {{ domen['ssl'] }}
-                </td>
-                <td>{{ domen['tags'][0] }}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Прилинковать</button>
+                    <form action="/linkHost" method="POST" class="domain_link">
+
+                        <input type="hidden" name="domain" value="{{ domen['domen'] }}">
+                        <input type="hidden" name="id" value="{{ domen['domen_id'] }}">
+                        <input type="hidden" name="host" value="{{ domen['host'] }}">
+                        <input type="submit" class="btn btn-outline-secondary btn-sm linkBtn" value="Прилинковать" name="{{ domen['domen_id'] }}">
+{#                        <button type="button" name="{{ domen['domen_id'] }}" class="btn btn-outline-secondary btn-sm">Прилинковать</button>#}
+                        <div style="opacity: 0" class=" spinner-border spinner-border-sm loadPlace" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </form>
                 </td>
             </tr>
                 {%  set i = i + 1 %}

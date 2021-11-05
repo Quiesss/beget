@@ -1,0 +1,36 @@
+{% extends 'main.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col m-2 ">
+            <span>{% if countSuccessUpload is not null %}{{ countSuccessUpload }}{% endif %}</span>
+
+                <form action="/uploadDomains" method="post" class="form-group w-50 m-2" enctype="multipart/form-data">
+
+                    Выберите хост:
+                    <select name="host" class="custom-select m-2">
+                        <option selected>Выберите хост</option>
+                        <option value="Linode">Linode</option>
+                        <option value="DO">DO</option>
+                    </select>
+
+                    <div class="input-group input-group-sm m-2">
+                        <div class="custom-file w-50">
+                    <label class="custom-file-label mb-2" for="customfile">Выберите файл для загрузки доменов (.txt): </label>
+                    <input type="file" class="custom-file-input mb-2" id="customfile" name="uploadFile"/>
+                        </div>
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-outline-secondary btn-lg btn-block" value="Загрузить"/>
+                        </div>
+
+                    </div>
+                </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -5,8 +5,8 @@ namespace Domens;
 
 use PDO;
 use Exception;
-use Domens\UserData;
 use Domens\Session;
+use Domens\AuthorizationException;
 
 class User
 {
@@ -42,6 +42,7 @@ class User
      * @param $password
      * @return bool
      * @throws AuthorizationException
+     * @throws DatabaseExcaption
      */
     public function create(string $name, $password): bool
     {
@@ -79,7 +80,7 @@ class User
             $this->session->setData('user', [
                 'user_login' => $q['user_login'],
                 'user_id' => $q['user_id'],
-                'onsite' => '1'
+                'onsite' => $q['status']
             ]);
             return true;
         } else {
@@ -87,19 +88,26 @@ class User
         }
 
     }
+
+    /**
+     * @param $param
+     * @throws DatabaseExcaption
+     */
     public function domenTable($param): void
     {
-        $query = "CREATE TABLE domen_{$param} (
-  `domen_id` int(11) NOT NULL,
-  `domen` varchar(100) DEFAULT NULL,
+        $query = "CREATE TABLE if not exists custom_domains (
+  `domen_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `domen` varchar(255) DEFAULT NULL,
+  `owner` varchar(255) DEFAULT NULL,
+  `host` varchar(255) DEFAULT NULL,
   `valid` varchar(30) DEFAULT NULL,
-  `datedomen` timestamp NULL DEFAULT NULL
+  `datedomen` timestamp NULL DEFAULT NULL,
+  primary key (`domen_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-  ALTER TABLE `domen_qwe`
-  ADD PRIMARY KEY (`domen_id`);";
-
+  CREATE INDEX owner_index ON custom_domains(owner) USING BTREE
+  ";
     $statement = $this->connection->exec($query);
-    if (empty($statement)) {
+    if ($statement === false) {
         throw new DatabaseExcaption("Table is not created, something wrong");
         }
     }

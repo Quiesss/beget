@@ -3,7 +3,9 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-                    "Domens\\": "src"
+                    "Domens\\": "src",
+                    "DomainsThings\\": "domain",
+                    "UserThings\\": "src/user"
         }
     },
     "authors": [
@@ -16,6 +18,8 @@
         "slim/slim": "4.*",
         "twig/twig": "^3.3",
         "slim/psr7": "^1.5",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-curl": "*",
+        "twbs/bootstrap": "4.2.1"
     }
 }

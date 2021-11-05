@@ -13,3 +13,9 @@
     padding-bottom: 3px;
     padding-left: 3px;
 }
+
+.notif {
+    position: fixed;
+    top: 0;
+    right: 0;
+}

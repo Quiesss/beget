@@ -4,7 +4,7 @@ namespace Domens;
 
 use Exception;
 
-class DatabaseExcaption extends Exception
+class DomainException extends Exception
 {
 
 }

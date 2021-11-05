@@ -13,7 +13,8 @@ class privatflare
      * @param string $tag
      * @return mixed
      */
-    public function getDomens(int $count, string $tag) {
+    public function getDomens(int $count, string $tag)
+    {
 
         $curl = curl_init();
 
@@ -31,7 +32,30 @@ class privatflare
             )
         ));
 
-        $response = curl_exec($curl);
-        return json_decode($response, true);
+        $response = json_decode(curl_exec($curl),true);
+        $domainslist = array();
+        $i=1;
+        foreach($response['domains'] as $key => $val)
+        {
+            if (isset($response['domains'][$key]['tags'][0]) && $response['domains'][$key]['tags'][0] == $tag) {
+                $domainslist[$i]['domain'] = ($response['domains'][$key]['domain'] == '') ? 'Пустая строка' : $response['domains'][$key]['domain'];
+                $domainslist[$i]['ssl'] = ($response['domains'][$key]['ssl'] == '1') ? 1 : 0;
+                $domainslist[$i]['online'] = ($response['domains'][$key]['online'] == '1') ? 1 : 0;
+                $domainslist[$i]['datedomen'] = $response['domains'][$key]['created'];
+                $domainslist[$i]['backend'] = $response['domains'][$key]['backend'];
+                $i++;
+            }
+        }
+//        foreach ($response['domains'] as $key => $val) {
+//            if ($val['tags'][0] == $tag) {
+//                $domainslist[] = $val[0]['domain'];
+//            }
+//        }
+        $array = [];
+        foreach ($domainslist as $key => $value) {
+            $array[$key] = $value['online'];
+        }
+        array_multisort($array, SORT_DESC, $domainslist);
+        return $domainslist;
     }
 }
