@@ -40,7 +40,6 @@ $content = new FilesystemLoader('templates');
 $view = new Environment($content);
 $domainMapper = new DomenMapper($connection);
 $app = AppFactory::create();
-
 $session = new Session();
 $sessionMiddleware = function(Request $request, RequestHandler $handler) use ($session) {
     $session->start();
@@ -83,7 +82,7 @@ $errorMiddleware->setErrorHandler(
 $user = new User($connection, $session);
 
 $app->get('/auth/login', function (Request $request, Response $response) use ($view, $session) {
-    var_dump($_SESSION);
+  //  var_dump($_SESSION);
     $body = $view->render('login.twig', [
         'msg' => $session->flush('msg')
     ]);
@@ -91,16 +90,16 @@ $app->get('/auth/login', function (Request $request, Response $response) use ($v
     return $response;
 });
 $app->post('/auth/login', function (Request $request, Response $response) use ($view, $user, $session) {
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
     $param = (array) $request->getParsedBody();
     try {
         $user->login($param['login'], $param['pass']);
     } catch (AuthorizationException $exception) {
         $session->setData('msg', $exception->getMessage());
-        return $response->withHeader('Location', '/auth/login');
+        return $response->withHeader('Location', '/auth/login')->withStatus(302);
     }
     //$session->setData('user_login', $param['login']);
-    return $response->withHeader('Location', '/dashboard');
+    return $response->withHeader('Location', '/dashboard')->withStatus(302);
 });
 $app->get('/auth/reg', function (Request $request, Response $response) use ($view, $session) {
 

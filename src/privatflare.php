@@ -5,8 +5,6 @@ namespace Domens;
 class privatflare
 {
 
-    public int $count;
-    public string $tag;
 
     /**
      * @param int $count

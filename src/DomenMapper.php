@@ -10,7 +10,7 @@ class DomenMapper
     public function __construct(PDO $connection) {
         $this->connection = $connection;
     }
-    public function GetByDomens(string $login): array
+    public function GetByDomens($login): array
     {
         $statement = $this->connection->prepare("SELECT * FROM custom_domains WHERE `owner` = ? ORDER BY `datedomen` DESC");
         $statement->execute([$login]);
