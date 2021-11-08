@@ -132,7 +132,7 @@ $app->get('/auth/logout', function (Request $request, Response $response) use ($
 $app->get('/dashboard', function (Request $request, Response $response) use ($view, $domainMapper, $session, $connection) {
 //    var_dump($_SESSION);
     $userData = new DomainThings($connection);
-    //$countDomains = $userData->getCountDomains();
+    $countDomains = $userData->getCountDomains();
     $userLogin = $session->getData('user')['user_login'];
     $domainlist = $domainMapper->GetByDomens($userLogin);
     $body = $view->render('dashboard.twig', [
@@ -182,7 +182,7 @@ $app->post('/uploadDomains', function (Request $request, Response $response) use
 $app->get('/privateflare', function (Request $request, Response $response) use ($view, $session) {
     $userLogin = $session->getData('user')['user_login'];
     $dFromPF = new privatflare();
-    $viewDomains = $dFromPF->getDomens(1, $userLogin);
+    $viewDomains = $dFromPF->getDomens(1, 'sss');
     $body = $view->render('pf.twig', [
         'domenlist' => $viewDomains,
         'msg' => $session->flush('msg'),
