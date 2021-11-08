@@ -55,7 +55,7 @@ class User
                 'login' => $name,
                 'pass' => password_hash($password, PASSWORD_BCRYPT)
             ]);
-            $this->domenTable($name);
+           // $this->domenTable($name);
             return true;
         } else return false;
     }
