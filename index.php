@@ -182,7 +182,7 @@ $app->post('/uploadDomains', function (Request $request, Response $response) use
 $app->get('/privateflare', function (Request $request, Response $response) use ($view, $session) {
     $userLogin = $session->getData('user')['user_login'];
     $dFromPF = new privatflare();
-    $viewDomains = $dFromPF->getDomens(1, 'sss');
+    $viewDomains = $dFromPF->getDomens(1, $userLogin);
     $body = $view->render('pf.twig', [
         'domenlist' => $viewDomains,
         'msg' => $session->flush('msg'),
@@ -194,7 +194,7 @@ $app->get('/privateflare', function (Request $request, Response $response) use (
 $app->post('/getDomains', function (Request $request, Response $response) use ($connection, $session) {
     $user_login = $session->getData('user')['user_login'];
     $param = (array) $request->getParsedBody();
-    $domainThings = new DomainThings($param, $connection);
+    $domainThings = new DomainThings($connection);
     try {
         $countSuccessDomains = $domainThings->getDomains($param['countDomains'], $user_login, $param['host']);
         $session->setData('successCount', "Успешно загружено " . $countSuccessDomains);
@@ -221,12 +221,14 @@ $app->get('/settings', function (Request $request, Response $response) use ($vie
     $settings = new Settings($connection, $session);
     $LT = $settings->getLinodeToken();
     $DoT = $settings->getDoToken();
-    $Anote = $settings->getIpNote();
+    $AnoteDo = $settings->getIpNoteDo();
+    $AnoteLinode = $settings->getIpNoteLinode();
     $body = $view->render('settings.twig', [
         'notif' => $session->flush('notif'),
         'LinodeToken' => $LT,
         'DoToken' => $DoT,
-        'Anote' => $Anote
+        'AnoteDo' => $AnoteDo,
+        'AnoteLinode' => $AnoteLinode
     ]);
     $response->getBody()->write($body);
     return $response;
@@ -236,7 +238,8 @@ $app->post('/settings', function (Request $request, Response $response) use ($co
     $settings = new Settings($connection, $session);
     if(isset($param['LinodeToken'])) $changeProcess = $settings->ChangeLinodeToken($param['LinodeToken']);
         elseif(isset($param['DoToken'])) $changeProcess = $settings->ChangeDoToken($param['DoToken']);
-            elseif(isset($param['Anote'])) $changeProcess = $settings->ChangeAnote($param['Anote']);
+            elseif(isset($param['Anote_Do'])) $changeProcess = $settings->ChangeAnoteDo($param['Anote_Do']);
+                elseif(isset($param['Anote_Linode'])) $changeProcess = $settings->ChangeAnoteLinode($param['Anote_Linode']);
         else $changeProcess = "something wrong !";
         echo $changeProcess;
     return $response;

@@ -11,9 +11,7 @@ class DomainThings
 {
     private PDO $connection;
 
-    /**
-     * @param array $param
-     */
+    
     public function __construct($connection)
     {
         $this->connection = $connection;

@@ -32,6 +32,17 @@
                 <div class="col-12 m-2">
                     <form class="changeToken" method="post" action="/settings">
                         <div class="input-group mb-3">
+                            <div class="col-sm-12 col-form-label pl-0">Введите ip для A-записи Linode: </div>
+                            <input required type="text" class="form-control" name="Anote_Linode" placeholder="Ip для Linode" aria-label="api key" value="{{ AnoteLinode }}" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Установить">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 m-2">
+                    <form class="changeToken" method="post" action="/settings">
+                        <div class="input-group mb-3">
                             <div class="col-sm-12 col-form-label pl-0">Введите апи ключ от DO: </div>
                             <input required type="text" class="form-control" name="DoToken" placeholder="OD Api Key" aria-label="api key" value="{{ DoToken }}" aria-describedby="button-addon2">
                             <div class="input-group-append">
@@ -43,8 +54,8 @@
             <div class="col-12 m-2">
                 <form class="changeToken" method="post" action="/settings">
                     <div class="input-group mb-3">
-                        <div class="col-sm-12 col-form-label pl-0">Введите ip для A-записи: </div>
-                        <input required type="text" class="form-control" name="Anote" placeholder="OD Api Key" aria-label="api key" value="{{ Anote }}" aria-describedby="button-addon2">
+                        <div class="col-sm-12 col-form-label pl-0">Введите ip для A-записи Digital Ocean: </div>
+                        <input required type="text" class="form-control" name="Anote_Do" placeholder="Ip для Digital Ocean" aria-label="api key" value="{{ AnoteDo }}" aria-describedby="button-addon2">
                         <div class="input-group-append">
                             <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Установить">
                         </div>
