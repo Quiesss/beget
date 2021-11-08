@@ -182,7 +182,7 @@ $app->post('/uploadDomains', function (Request $request, Response $response) use
 $app->get('/privateflare', function (Request $request, Response $response) use ($view, $session) {
     $userLogin = $session->getData('user')['user_login'];
     $dFromPF = new privatflare();
-    $viewDomains = $dFromPF->getDomens(1, 'sss');
+    $viewDomains = $dFromPF->getDomens(1, $userLogin);
     $body = $view->render('pf.twig', [
         'domenlist' => $viewDomains,
         'msg' => $session->flush('msg'),
