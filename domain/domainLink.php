@@ -148,9 +148,9 @@ class domainLink
         if(isset($result['message']))
         {
             if($result['message'] == "domain '$domain': name already exists") {
-                $this->trashDomain($domain, 'DO');
+                $trash = $this->trashDomain($domain, 'DO');
                 $this->DelDomain($domain, 'DO');
-                $answer = "Невалидный домен, {$result['message']}";
+                $answer = "Невалидный домен, {$result['message']}" . " " . $trash;
                 $success = 1;
             } else  $answer = $result['message'];
         } else {
@@ -173,18 +173,22 @@ class domainLink
 
     public function DelDomain($domain, $host)
     {
-        $query = $this->connection->prepare("DELETE FROM custom_domains WHERE `domen` = :domain AND `host` = :host LIMIT 1");
+        $query = $this->connection->prepare("DELETE FROM custom_domains WHERE `domen` = :domain AND `host` = :host AND `owner` = :login LIMIT 1");
         $query->execute([
             'domain' => $domain,
-            'host' => $host
+            'host' => "{$host}",
+            'login' => $this->login
         ]);
     }
 
     public function trashDomain($domain, $host)
     {
-        $query = $this->connection->prepare("INSERT INTO trash_domains (`domen`, `valid`, `owner`, `datedomen`, `host`) SELECT `domen`, `valid`, `owner`, NOW(), `host` FROM custom_domains WHERE `domen` = ? AND `host` = ? LIMIT 1");
-        $query->execute([$domain, "{$host}"]);
-        return $query->fetch();
+        $query = $this->connection->prepare("INSERT INTO trash_domains (`domen`, `valid`, `owner`, `datedomen`, `host`) SELECT `domen`, `valid`, `owner`, NOW(), `host` FROM custom_domains WHERE `domen` = ? AND `host` = ? AND `owner` = ? LIMIT 1");
+        $statement = $query->execute([$domain, "{$host}", $this->login]);
+        if($statement) {
+            return "yeap";
+        } else return "oops";
+        //$query->fetch()
     }
 
 }

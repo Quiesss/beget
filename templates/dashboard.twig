@@ -41,12 +41,14 @@
     <h2 class="h2">Не линкованные</h2>
     <div class="btn-toolbar mb-2 mb-md-0 ">
 {#   Получение доменов     #}
+<span class="m-2">{{ countSuccessDomain }} </span>
+<span class="m-2">{{ domain_msg }} </span>
         <form action="/getDomains" class="input-group input-group-sm" method="post">
 {#            <span class="m-2">{{ hostMsg }} </span>#}
 {#            <span class="m-2">{{ anoteMsg }} </span>#}
 {#            <span class="m-2">{{ pfMsg }} </span>#}
-{#            <span class="m-2">{{ domain_msg }} </span>#}
-{#            <span class="m-2">{{ countSuccessDomain }} </span>#}
+           
+           
 
             <div class="input-group input-group-sm">
                 <select required class="custom-select" style="width: 5px" name="host">
@@ -85,13 +87,13 @@
             {% for domen in domenlist %}
             <tr>
                 <td>{{ i }}</td>
-                <td>{{ domen['domen'] }}</td>
+                <td>{{ domen['domen']|trim }}</td>
                 <td>{{ domen['datedomen']|date("m/d/Y") }}</td>
-                <td>{{ domen['host'] }}</td>
+                <td>{{ domen['host']|trim }}</td>
                 <td>
                     <form action="/linkHost" method="POST" class="domain_link">
 
-                        <input type="hidden" name="domain" value="{{ domen['domen'] }}">
+                        <input type="hidden" name="domain" value="{{ domen['domen']|trim }}">
                         <input type="hidden" name="id" value="{{ domen['domen_id'] }}">
                         <input type="hidden" name="host" value="{{ domen['host'] }}">
                         <input type="submit" class="btn btn-outline-secondary btn-sm linkBtn" value="Прилинковать" name="{{ domen['domen_id'] }}">

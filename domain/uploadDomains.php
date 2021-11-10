@@ -24,7 +24,7 @@ class uploadDomains
             $correctFile = preg_replace('/^(https?:)?(\/\/)?(www\.)?/', '', $val);
             $query = $this->connection->prepare("INSERT INTO db_domens_fb (domen, host) VALUES (:domain, :host)");
             $query->execute([
-                'domain' => $correctFile,
+                'domain' => trim($correctFile),
                 'host' => $host
             ]);
             $success++;

@@ -17,7 +17,7 @@ class DomainThings
         $this->connection = $connection;
     }
 
-    public function getUserInfo(string $login): array
+    public function getUserInfo($login = ""): array
     {
         $query = $this->connection->prepare('SELECT * FROM users WHERE `user_login` = :login LIMIT 1');
         $query->execute(['login' => $login]);
@@ -70,7 +70,7 @@ class DomainThings
     {
         $successDomains = 0;
         $totalDomains = $this->getCountDomains();
-        $userData = $this->getUserInfo($login)[0];
+        $userData = $this->getUserInfo($login);
 
         $timeLastGet = (strtotime(date('Y-m-d H:i:s')) - strtotime($userData['date_last_d']))/3600;
         if($timeLastGet >= 24) {

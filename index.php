@@ -202,6 +202,7 @@ $app->post('/getDomains', function (Request $request, Response $response) use ($
         return $response->withHeader('Location', '/dashboard');
     } catch (DomainException $exception) {
         $session->setData('domain_msg', $exception->getMessage());
+        
         return $response->withHeader('Location', '/dashboard');
     }
 });

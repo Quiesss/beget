@@ -73,3 +73,8 @@ git checkout 7a0f37ba990c0c68a0b5ba2d3f5a376b2b85f3d7
 git status
 git checkout main
 git branch
+git branch 
+git log --pretty=oneline 
+git status
+git add .
+git commit -m 'fix getdomains and some'
