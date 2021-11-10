@@ -78,3 +78,26 @@ git log --pretty=oneline
 git status
 git add .
 git commit -m 'fix getdomains and some'
+зцв
+pwd
+ls
+ls -a
+git status
+git add .
+git commit -m 'commit before make repo is bare'
+git tatus
+git status
+git push
+git --git-dir=repo.git config core.bare true
+pwd
+git --git-dir=.git config core.bare true
+git status
+git status
+git log
+git add .
+ssh to remote server
+git clone --bare -l ./ ./testshowcase
+pwd
+ls
+reconnect
+exit

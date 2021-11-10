@@ -15,7 +15,7 @@ $(document).ready(function() {
         e.preventDefault();
         let tr = this.closest("tr");
         let clone = $('.toast:first').clone().appendTo('.notifications');
-        clone.toast({'delay': 25000});
+        clone.toast({'delay': 4000});
         let span = $(this).find('.loadPlace');
         let btn = $('.linkBtn')
         // $(this).find('span').text('asd');

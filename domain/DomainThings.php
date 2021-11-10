@@ -66,7 +66,7 @@ class DomainThings
      * @return int
      * @throws DomainException
      */
-    public function getDomains(int $count, string $login, string $host): int
+    public function getDomains(int $count, $login, string $host): int
     {
         $successDomains = 0;
         $totalDomains = $this->getCountDomains();
@@ -87,7 +87,7 @@ class DomainThings
                     $statement = $query->execute([$login, "{$host}"]);
                     if ($query->rowCount() != 0) {
                         $successDomains = $count;
-                        $query = $this->connection->prepare('DELETE FROM db_domens_fb WHERE `host` = :host LIMIT 1');
+                        $query = $this->connection->prepare("DELETE FROM db_domens_fb WHERE `host` = :host LIMIT $count");
                         $query->bindParam('host', $host);
                         $query->execute();
                         $query = $this->connection->prepare('UPDATE users SET date_last_d = NOW(), d_today = ? WHERE user_login = ?');
