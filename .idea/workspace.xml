@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="411a417f-217b-4876-92e4-2e521cdc6609" name="Changes" comment="" />
+    <list default="true" id="411a417f-217b-4876-92e4-2e521cdc6609" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/domain/DomainThings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/domainLink.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/uploadDomains.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DomainException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/user/Settings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/adminpanel.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/pf.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/settings.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DatabaseExcaption.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseExcaption.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DomenMapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomenMapper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserData.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/privatflare.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/privatflare.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
