@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="petragfn_v2@petragfn.beget.tech">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.23">
-    <root id="1"/>
+    <root id="1">
+      <ServerVersion>5.7.21</ServerVersion>
+      <Grants>petragfn\\_v2|schema||petragfn_v2||ALTER|G
+petragfn\\_v2|schema||petragfn_v2||ALTER ROUTINE|G
+petragfn\\_v2|schema||petragfn_v2||CREATE|G
+petragfn\\_v2|schema||petragfn_v2||CREATE ROUTINE|G
+petragfn\\_v2|schema||petragfn_v2||CREATE TEMPORARY TABLES|G
+petragfn\\_v2|schema||petragfn_v2||CREATE VIEW|G
+petragfn\\_v2|schema||petragfn_v2||DELETE|G
+petragfn\\_v2|schema||petragfn_v2||DROP|G
+petragfn\\_v2|schema||petragfn_v2||EVENT|G
+petragfn\\_v2|schema||petragfn_v2||EXECUTE|G
+petragfn\\_v2|schema||petragfn_v2||INDEX|G
+petragfn\\_v2|schema||petragfn_v2||INSERT|G
+petragfn\\_v2|schema||petragfn_v2||LOCK TABLES|G
+petragfn\\_v2|schema||petragfn_v2||REFERENCES|G
+petragfn\\_v2|schema||petragfn_v2||SELECT|G
+petragfn\\_v2|schema||petragfn_v2||SHOW VIEW|G
+petragfn\\_v2|schema||petragfn_v2||TRIGGER|G
+petragfn\\_v2|schema||petragfn_v2||UPDATE|G</Grants>
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <DefaultCasing>exact</DefaultCasing>
+    </root>
     <schema id="2" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
     </schema>
