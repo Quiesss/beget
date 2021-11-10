@@ -87,7 +87,7 @@ class DomainThings
                     $statement = $query->execute([$login, "{$host}"]);
                     if ($query->rowCount() != 0) {
                         $successDomains = $count;
-                        $query = $this->connection->prepare("DELETE FROM db_domens_fb WHERE `host` = :host LIMIT $count");
+                        $query = $this->connection->prepare("DELETE FROM db_domens_fb WHERE `host` = :host LIMIT 2");
                         $query->bindParam('host', $host);
                         $query->execute();
                         $query = $this->connection->prepare('UPDATE users SET date_last_d = NOW(), d_today = ? WHERE user_login = ?');
